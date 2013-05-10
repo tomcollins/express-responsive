@@ -1,5 +1,24 @@
 @import "normalize.less";
 @import "main.less";
-@import "vendor/smart-grid.min.less";
 @import "vendor/responsive-nav.less";
 @import "nav.less";
+
+@import 'grid.less';
+
+@columns: 12;
+@column-width: 60;
+@gutter-width: 20;
+
+// mobile first
+
+article {
+   .column(12);
+}
+section {
+   .column(12);
+}
+
+@media screen and (min-width: 720px) {
+  article { .column(9); }
+  section { .column(3); }
+}
