@@ -1,24 +1,11 @@
 @import "normalize.less";
-@import "main.less";
-@import "vendor/responsive-nav.less";
-@import "nav.less";
+//@import "main.less";
 
-@import 'grid.less';
+@import "base.less";
+@import "layout.less";
+@import "modules.less";
 
-@columns: 12;
-@column-width: 60;
-@gutter-width: 20;
 
-// mobile first
 
-article {
-   .column(12);
-}
-section {
-   .column(12);
-}
 
-@media screen and (min-width: 720px) {
-  article { .column(9); }
-  section { .column(3); }
-}
+

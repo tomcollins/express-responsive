@@ -1,0 +1,29 @@
+@import 'grid.less';
+
+@columns: 12;
+@column-width: 60;
+@gutter-width: 20;
+
+@total-width: 100%;
+
+// mobile first
+
+#main {
+  padding-top: 1em;
+}
+
+article,
+section {
+   .column(12);
+   background: #cecece;
+   margin-bottom: 1em;
+}
+
+@media screen and (min-width: 720px) {
+  #main {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  article { .column(9); }
+  section { .column(3); }
+}

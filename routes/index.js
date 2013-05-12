@@ -4,5 +4,8 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index', { 
+    package: exports.package,
+    title: 'Express' 
+  });
 };

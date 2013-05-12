@@ -7,8 +7,8 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['public/js/vendor/*.js', 'public/js/*.js'],
-        dest: 'public/concat.js'
+        src: ['src/vendor/*.js', 'src/*.js'],
+        dest: 'public/js/<%= pkg.name %>.js'
       }
     },
     uglify: {
@@ -17,17 +17,16 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'public/js/<%= pkg.name %>.<%= pkg.version %>.min.js': ['<%= concat.dist.dest %>']
         }
       }
     },
     qunit: {
-      files: ['test/**/*.html']
+      files: []
     },
     jshint: {
-      files: ['gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+      files: ['gruntfile.js', 'src/main.js'],
       options: {
-        // options here to override JSHint defaults
         globals: {
           jQuery: true,
           console: true,
@@ -37,8 +36,11 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'qunit']
+      files: ['src/**/*.js'],
+      tasks: ['dev'],
+      options: {
+        nospawn: true
+      }
     }
   });
 
@@ -50,6 +52,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['jshint', 'qunit']);
 
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
+  grunt.registerTask('dev', ['jshint', 'concat', 'uglify']);
+
+  grunt.registerTask('default', ['jshint'/*, 'qunit'*/, 'concat', 'uglify']);
 
 };

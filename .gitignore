@@ -13,3 +13,8 @@ results
 
 npm-debug.log
 node_modules
+
+public/styles/style.css
+public/js/express-responsive.js
+public/js/express-responsive.min.js
+public/js/express-responsive.**.min.js
