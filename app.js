@@ -28,6 +28,7 @@ app.configure(function(){
   app.use(app.router);
   app.use(staticPath.middleware);
   app.locals({
+    package: package,
     staticPath: staticPath.staticPath,
     environment: environment
   });
