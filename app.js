@@ -3,8 +3,15 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
+if (undefined === process.env.NODE_ENV || "" === process.env.NODE_ENV) {
+  throw('NODE_ENV is not set');
+}
+var environment = process.env.NODE_ENV;
+
 var package = fs.readFileSync('package.json');
 package = JSON.parse(package);
+
+var staticPath = require('./lib/express-staticpath-middlewear').create('static-' +package.version);
 
 var routes = require('./routes');
 routes.package = package;
@@ -19,10 +26,14 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
+  app.use(staticPath.middleware);
+  app.locals({
+    staticPath: staticPath.staticPath,
+    environment: environment
+  });
 });
 
 app.configure('production', function () {
-  app.use();
   app.use(require('less-middleware')({ 
     src: __dirname + '/public',
     compress: true
@@ -44,5 +55,5 @@ app.configure('development', function () {
 app.get('/', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port') +" in " +process.env.NODE_ENV);
+  console.log("Express server listening on port " + app.get('port') +" in " +environment);
 });

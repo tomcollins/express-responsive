@@ -17,8 +17,11 @@ html(class="no-js", lang="en")
 
       // Add rel links for icons etc
 
-      link(rel='stylesheet', href='/styles/style.css')
-      script(src='js/#{package.name}.#{package.version}.min.js')
+      link(rel='stylesheet', href=staticPath('/styles/style.css'))
+      if('development' === environment)
+        script(src=staticPath('/js/#{package.name}.js'))
+      else
+        script(src=staticPath('/js/#{package.name}.min.js'))
     body
       //if lt IE 7
         p.chromeframe
